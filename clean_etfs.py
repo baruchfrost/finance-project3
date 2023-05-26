@@ -15,6 +15,9 @@ def clean_file(input_path, output_path):
             date = vol_and_date.pop()
             volume = "".join(vol_and_date)
 
+            if volume == "":
+                continue
+
             # save data
             final_data = []
             final_data.extend(split_line[:4])
