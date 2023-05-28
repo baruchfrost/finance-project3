@@ -5,20 +5,29 @@
   <link rel="stylesheet" type="text/css" href="/index.css">
 </head>
 <body>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/descriptions.js"></script>
+  <script src="/index.js" defer></script>
+
   <h1>Business Cycle Analysis Dashboard</h1>
 
+  <div class="side">
+    <p style="font-size: 2.3rem; padding-left: 1.25rem;">Sections</p>
+    <div class="nav">
+      <div class="nav-slider" id="nav-slider"></div>
+      <ol class="nav-list">
+        <li class="nav-item"><a href="#" onclick="selectEcon()">Relationships in the Economy</a></li>
+        <li class="nav-item"><a href="#" onclick="selectSect()">Fed Funds and the Sectors</a></li>
+        <li class="nav-item"><a href="#" onclick="selectPlay()">Playground</a></li>
+      </ol>
+    </div>
+    <div id="info-text"></div>
+  </div>
+
   <div id="chart-container">
-    <div id="chart"></div>
+    <div id="chart" style="float: left;"></div>
+    <div id="dashboard" style="float: right;"></div>
   </div>
-
-  <div class="nav">
-    Test
-  </div>
-
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="/index.js" type="module"></script>
 </body>
 </html>

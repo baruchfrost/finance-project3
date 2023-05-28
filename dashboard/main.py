@@ -13,7 +13,7 @@ class SectorETFs(db.Model):
     __tablename__ = 'sector_etfs'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
-    date = db.Column(db.String(255), nullable=False)
+    date = db.Column(db.String(10), nullable=False)
     open = db.Column(db.Float, nullable=False)
     high = db.Column(db.Float, nullable=False)
     low = db.Column(db.Float, nullable=False)
