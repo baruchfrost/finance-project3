@@ -13,21 +13,22 @@
   <h1>Business Cycle Analysis Dashboard</h1>
 
   <div class="side">
-    <p style="font-size: 2.3rem; padding-left: 1.25rem;">Sections</p>
+    <p style="font-size: 1.8rem; padding-left: 1.25rem;">Sections</p>
     <div class="nav">
-      <div class="nav-slider" id="nav-slider"></div>
       <ol class="nav-list">
-        <li class="nav-item"><a href="#" onclick="selectEcon()">Relationships in the Economy</a></li>
-        <li class="nav-item"><a href="#" onclick="selectSect()">Fed Funds and the Sectors</a></li>
-        <li class="nav-item"><a href="#" onclick="selectPlay()">Playground</a></li>
+        <li class="nav-item"><a href="#" onclick="selectEcon()">Rates and Employment View</a></li>
+        <li class="nav-item"><a href="#" onclick="selectSect()">Business Cycle View</a></li>
+        <li class="nav-item"><a href="#" onclick="selectPlay()">Customizable View</a></li>
       </ol>
     </div>
-    <div id="info-text"></div>
   </div>
 
   <div id="chart-container">
-    <div id="chart" style="float: left;"></div>
-    <div id="dashboard" style="float: right;"></div>
+    <div id="chart" ></div><div id="dashboard"></div>
+    <div id="info">
+      <div id="info-text"></div>
+    </div>
+    
   </div>
 </body>
 </html>

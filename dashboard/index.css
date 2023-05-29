@@ -1,5 +1,6 @@
 .side {
     float: right;
+    height: 100vh;
 }
 
 .nav {
@@ -14,17 +15,22 @@
 }
 
 .nav-item {
-    font-size: 2rem;
+    font-size: 1.6rem;
     margin-bottom: 2rem;
 }
 
-.nav-slider {
-    float: left;
-    background-color: blue;
-    height: 2.4rem;
-    width: 0.75rem;
+#info-text {
+    font-size: 1.4rem;
+    padding-left: 100px;
+    top: 0;
 }
 
-#info-text {
-    font-size: 1.8rem;
+.dash-form {
+    float: left;
+}
+
+#dashboard {
+    position: absolute;
+    margin-left: 970px;
+    margin-top: -360px;
 }

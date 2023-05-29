@@ -32,8 +32,8 @@ class UnemploymentRate(db.Model):
     date = db.Column(db.String(10), nullable=False)
     rate = db.Column(db.Float)
 
-class YieldCurve(db.Model):
-    __tablename__ = "yield_curve"
+class tbondCurve(db.Model):
+    __tablename__ = "t_bond"
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.String(10), nullable=False)
     rate = db.Column(db.Float)
@@ -49,12 +49,12 @@ def after_request(response):
 
 @app.route('/')
 def home():
-    return {"routes": ["/sector_etfs", "/fed_funds_rates", "/unemployment_rate", "/yield_curve"]}
+    return {"routes": ["/sector_etfs", "/fed_funds_rates", "/unemployment_rate", "/t_bond"]}
 
 @app.route('/sector_etfs')
 def sector_etfs():
     start_date = request.args.get('start_date', default="2006-08-01")
-    end_date = request.args.get('end_date')
+    end_date = request.args.get('end_date', default="2023-02-01")
     if start_date and end_date:
         rows = SectorETFs.query.filter(SectorETFs.date.between(start_date, end_date)).all()
     elif start_date:
@@ -63,12 +63,12 @@ def sector_etfs():
         rows = SectorETFs.query.filter(SectorETFs.date <= end_date).all()
     else:
         rows = SectorETFs.query.all()
-    return jsonify([row.__dict__ for row in rows])
+    return jsonify([{"id": row.id, "date": row.date, "name": row.name, "open": row.open} for row in rows])
 
 @app.route('/fed_funds_rate')
 def fed_funds_rate():
     start_date = request.args.get('start_date', default="2006-08-01")
-    end_date = request.args.get('end_date')
+    end_date = request.args.get('end_date', default="2023-02-01")
     if start_date and end_date:
         rows = FedFundsRate.query.filter(FedFundsRate.date.between(start_date, end_date)).all()
     elif start_date:
@@ -82,7 +82,7 @@ def fed_funds_rate():
 @app.route('/unemployment_rate')
 def unemployment_rate():
     start_date = request.args.get('start_date', default="2006-08-01")
-    end_date = request.args.get('end_date')
+    end_date = request.args.get('end_date', default="2023-02-01")
     if start_date and end_date:
         rows = UnemploymentRate.query.filter(UnemploymentRate.date.between(start_date, end_date)).all()
     elif start_date:
@@ -93,18 +93,18 @@ def unemployment_rate():
         rows = UnemploymentRate.query.all()
     return jsonify([{'id': row.id, 'date': row.date, 'rate': row.rate} for row in rows])
 
-@app.route('/yield_curve')
-def yield_curve():
+@app.route('/t_bond')
+def t_bond():
     start_date = request.args.get('start_date', default="2006-08-01")
-    end_date = request.args.get('end_date')
+    end_date = request.args.get('end_date', default="2023-02-01")
     if start_date and end_date:
-        rows = YieldCurve.query.filter(YieldCurve.date.between(start_date, end_date)).all()
+        rows = tbondCurve.query.filter(tbondCurve.date.between(start_date, end_date)).all()
     elif start_date:
-        rows = YieldCurve.query.filter(YieldCurve.date >= start_date).all()
+        rows = tbondCurve.query.filter(tbondCurve.date >= start_date).all()
     elif end_date:
-        rows = YieldCurve.query.filter(YieldCurve.date <= end_date).all()
+        rows = tbondCurve.query.filter(tbondCurve.date <= end_date).all()
     else:
-        rows = YieldCurve.query.all()
+        rows = tbondCurve.query.all()
 
     return jsonify([{'id': row.id, 'date': row.date, 'rate': row.rate} for row in rows])
 
