@@ -200,7 +200,7 @@ function selectEcon() {
   data_mock = ["fed_funds", "t_bond", "unemployment"];
 
   layout = {
-    title: "Fed Funds Vs tbond Curve Vs Unemployment",
+    title: "Fed Funds Vs T-bond Vs Unemployment",
     legend: {
       orientation: 'h',
       yanchor: 'bottom',
