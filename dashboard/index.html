@@ -16,12 +16,12 @@
     <p style="font-size: 1.8rem; padding-left: 1.25rem;">Sections</p>
     <div class="nav">
       <ol class="nav-list">
-        <li class="nav-item"><a href="#" onclick="selectEcon()">Rates and Employment View</a></li>
-        <li class="nav-item"><a href="#" onclick="selectSect()">Business Cycle View</a></li>
-        <li class="nav-item"><a href="#" onclick="selectPlay()">Customizable View</a></li>
+        <li class="nav-item"><input type="radio" id="econ" name="view" onclick="selectEcon()" checked><label for="econ">Rates and Employment View</label></li>
+        <li class="nav-item"><input type="radio" id="sect" name="view" onclick="selectSect()"><label for="sect">Business Cycle View</label></li>
+        <li class="nav-item"><input type="radio" id="play" name="view" onclick="selectPlay()"><label for="play">Customizable View</label></li>
       </ol>
     </div>
-  </div>
+  </div>  
 
   <div id="chart-container">
     <div id="chart" ></div><div id="dashboard"></div>

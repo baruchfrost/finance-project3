@@ -277,14 +277,18 @@ function selectSect() {
     selections.innerHTML = etfsToHtml(selected_etfs);
   }
   
-  data = [fed_funds_trace, etfsTraces.XLF, etfsTraces.KBE];
-  data_mock = ["fed_funds", "XLF", "KBE"];
-  Plotly.react('chart', data, layout);
-
   if (selected_etfs == null) {
     selected_etfs = ["XLF", "KBE"];
   }
   selections.innerHTML = etfsToHtml(selected_etfs);
+  
+  data = [fed_funds_trace];
+  for (i in selected_etfs) {
+    let sector = selected_etfs[i];
+    data.push(etfsTraces[sector]);
+  }
+  data_mock = ["fed_funds", "XLF", "KBE"];
+  Plotly.react('chart', data, layout);
 
   layout = {
     title: "Fed Funds and Sectors",
