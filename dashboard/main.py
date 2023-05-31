@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -46,10 +46,6 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     return response
-
-@app.route('/')
-def home():
-    return {"routes": ["/sector_etfs", "/fed_funds_rates", "/unemployment_rate", "/t_bond"]}
 
 @app.route('/sector_etfs')
 def sector_etfs():
@@ -107,6 +103,14 @@ def t_bond():
         rows = tbondCurve.query.all()
 
     return jsonify([{'id': row.id, 'date': row.date, 'rate': row.rate} for row in rows])
+
+@app.route('/')
+def home():
+    return app.send_static_file('index.html')
+
+@app.route('/static')
+def send_file(path):
+    return send_from_directory('./static/', path)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,6 +1,6 @@
 // using axios javascript library to query data from flask api
 const api = axios.create({
-  baseURL: 'http://localhost:5000'
+  baseURL: window.location.pathname
 });
 
 // initializing variables for plotting
@@ -8,6 +8,8 @@ var fed_funds_data, t_bond_data, unemployment_rate_data;
 var fed_funds_trace, t_bond_trace, unemployment_rate_trace;
 var data, data_mock, layout;
 var selected_etfs = null;
+var selected_rates = null;
+var traces;
 
 var etfsSymbolsAndDescriptions = {
   "XLY": "Cons. Disc. Select Sector SPDR® Fund",
@@ -283,11 +285,12 @@ function selectSect() {
   selections.innerHTML = etfsToHtml(selected_etfs);
   
   data = [fed_funds_trace];
+  data_mock = ["fed_funds"];
   for (i in selected_etfs) {
     let sector = selected_etfs[i];
     data.push(etfsTraces[sector]);
+    data_mock.push(sector);
   }
-  data_mock = ["fed_funds", "XLF", "KBE"];
   Plotly.react('chart', data, layout);
 
   layout = {
@@ -408,6 +411,15 @@ function selectPlay() {
     }
   });
 
+  if (traces == undefined) {
+    traces = {
+      "fed_funds": fed_funds_trace,
+      "t_bond": t_bond_trace,
+      "unemployment": unemployment_rate_trace,
+      ...etfsTraces
+    };
+  }
+
   let selections = document.getElementById("selections");
 
   var sectors = document.getElementById("sectors");
@@ -422,15 +434,22 @@ function selectPlay() {
     selected_etfs.push(sector);
     selections.innerHTML = etfsToHtml(selected_etfs);
   }
-  
-  data = [fed_funds_trace, t_bond_trace, etfsTraces.XLF, etfsTraces.KBE];
-  data_mock = ["fed_funds", "t_bond", "XLF", "KBE"];
-  Plotly.react('chart', data, layout);
+
+  if (selected_rates == null) {
+    selected_rates = ["fed_funds", "t_bond"];
+  }
 
   if (selected_etfs == null) {
     selected_etfs = ["XLF", "KBE"];
   }
   selections.innerHTML = etfsToHtml(selected_etfs);
+
+  data = [];
+  data_mock = [...selected_rates, ...selected_etfs];
+  for (i in data_mock) {
+    data.push(traces[data_mock[i]]);
+  }
+  Plotly.react('chart', data, layout);
 
   layout = {
     title: "Fed Funds and Sectors",
