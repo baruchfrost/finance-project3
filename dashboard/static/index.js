@@ -82,7 +82,7 @@ api.get("/fed_funds_rate").then(function (response) {
         x: t_bond_data.map(d => d.date),
         y: t_bond_data.map(d => d.rate),
         type: 'line',
-        name: "T-bond"
+        name: "Yield Curve"
       };
 
       unemployment_rate_trace = {
@@ -151,7 +151,7 @@ function selectEcon() {
     <input type="checkbox" id="unemployment" name="unemployment" value="Unemployment" checked>
     <label for="unemployment">Unemployment</label><br>
     <input type="checkbox" id="tbond" name="tbond" value="tbond" checked>
-    <label for="tbond">T-bond</label>
+    <label for="tbond">Yield Curve</label>
   </form>
   `;
   var fedfunds = document.getElementById("fedfunds");
@@ -202,7 +202,7 @@ function selectEcon() {
   data_mock = ["fed_funds", "t_bond", "unemployment"];
 
   layout = {
-    title: "Fed Funds Vs T-bond Vs Unemployment",
+    title: "Fed Funds Vs Yield Curve Vs Unemployment",
     legend: {
       orientation: 'h',
       yanchor: 'bottom',
